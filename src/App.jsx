@@ -1,4 +1,5 @@
 import ProductList from "./components/ProductList";
+import FloatingCartButton from "./components/FloatingCartButton";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
           <ProductList />
         </div>
       </div>
+      <FloatingCartButton />
     </>
   );
 }
