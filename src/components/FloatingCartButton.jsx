@@ -14,7 +14,7 @@ export default function FloatingCartButton() {
       <img className="w-6 h-6 mr-4" src={ShoppingCart} alt="" />
       <span className="text-lg font-semibold">View your cart : {cart.cartItems.length}</span>
     </button>
-      {showModal && createPortal(<Cart />, document.body)}
+      {showModal && createPortal(<Cart onClose={() => setShowModal(false)} />, document.body)}
     </>
   )
 }
