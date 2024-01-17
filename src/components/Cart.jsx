@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { updateItemFromSelect, deleteFromCart } from "../features/cart";
 
 export default function Cart({ onClose }) {
   const cart = useSelector((state) => state.cart);
@@ -31,22 +32,25 @@ export default function Cart({ onClose }) {
                 <p className="mr-auto ml-2 text-lg font-semibold">{el.title}</p>
 
                 <select name="quantity" className="w-20 p-2 rounded mr-4"
-                //</li>onChange={e => dispatch()}
+                onChange={e => dispatch(updateItemFromSelect({value: e.target.value, id: el.id}))}
+                value={el.quantity}
                 >
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value=""></option>
-                  <option value="">4</option>
-                  <option value="">5</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
                 </select>
-                <button className="bg-slate-900 text-slate-200 px-2 inline-flex items-center justify-center rounded p-2">Remove from cart</button>
+                <button 
+                onClick={() => dispatch(deleteFromCart(el.id))}
+                className="bg-slate-900 text-slate-200 px-2 inline-flex items-center justify-center rounded p-2">Remove from cart</button>
               </li>
             ))
           ) : (
             <li>Add some items to your cart ...</li>
           )}
         </ul>
-        <p className="text-xl">Your total :</p>
+        <p className="text-xl">Your total : <span className="font-semibold">{cart.cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0).toFixed(2)}$</span></p>
         <button className="block mx-auto bg-slate-800 text-slate-200 rounded px-4 py-2 mt-7">Proceed to checkout</button>
       </div>
     </div>

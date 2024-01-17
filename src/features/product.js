@@ -15,6 +15,9 @@ export const products = createSlice({
   extraReducers: {
     ["cart/createCartItem"]: (state, action) => {
       state.items.find(el => el.id === action.payload.id).picked = true
+    },
+    ["cart/deleteFromCart"]: (state, action) => {
+      state.items.find(el => el.id === action.payload).picked = false
     }
   }
 });
